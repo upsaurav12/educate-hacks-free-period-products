@@ -7,3 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+Location.create(
+    :name => 'Johnson County Public Library',
+    :street => '350 Clearwater Blvd',
+    :city => 'Whiteland',
+    :state_province => 'Indiana',
+    :country => 'United States',
+    :directions => 'Just around the corner to the right. Multiple single-person bathrooms.'
+    )
