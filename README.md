@@ -1,24 +1,22 @@
-# README
+# EducateHacks | Free Period Products
+> Any idea for a catchy project name?
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup dev environment
+- (optional) install `frum` or `asdf` for ruby version control 
+- install ruby with version: `3.2.2`
+- install dependencies
+```bash
+# install bundle for package management 
+gem install bundle
+# install project dependencies
+bundle install
+```
+- init/migrate database
+```bash
+rails db:migrate
+```
+- run local server
+```bash
+rails s
+```
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
