@@ -3,7 +3,11 @@ class LocationsController < ApplicationController
 
   # GET /locations or /locations.json
   def index
-    @locations = Location.all
+    if params[:place].present?
+      @locations = Location.near(params[:place], params[:distance] || 10, order: :distance)
+    else
+      @locations = Location.all
+    end
   end
 
   # GET /locations/1 or /locations/1.json
@@ -57,14 +61,6 @@ class LocationsController < ApplicationController
     end
   end
 
-  def search
-    if params[:city].present?
-      @places = Place.where(city: params[:city])
-    else
-      flash[:error] = "Please provide a city name"
-      @places = []
-    end
-  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_location
