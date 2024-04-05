@@ -20,3 +20,19 @@ rails db:migrate
 rails s
 ```
 
+## Setting up Mapbox API for map canvas
+- go to mapbox, setup an account and get API access token 
+https://www.mapbox.com/
+
+- (optional) check the quota for free plan and use it carefully under free tier 
+(should be enough for local dev tho)
+https://www.mapbox.com/pricing
+
+- create your local environment variable file `.env` in the root project dir `~/educate-hacks-free-period-products/`
+- copy & paste your access token in the file, make sure you never push this to github
+(should be protected by default `.gitignore` already)
+```bash
+# .env
+MAPBOX_ACCESS_TOKEN=<copy_and_paste_your_token_here>
+```
+
