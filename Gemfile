@@ -67,3 +67,7 @@ group :test do
 end
 
 gem "geocoder", "~> 1.8"
+
+# 24-04-05 added for API keys 
+gem "dotenv-rails", groups: [:devlopment, :test]
+
