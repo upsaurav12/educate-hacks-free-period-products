@@ -28,11 +28,11 @@ https://www.mapbox.com/
 (should be enough for local dev tho)
 https://www.mapbox.com/pricing
 
-- create your local environment variable file `.env` in the root project dir `~/educate-hacks-free-period-products/`
+- create your local environment variable file `.env.local` in the root project dir `~/educate-hacks-free-period-products/`
 - copy & paste your access token in the file, make sure you never push this to github
 (should be protected by default `.gitignore` already)
 ```bash
-# .env
+# .env.local
 MAPBOX_ACCESS_TOKEN=<copy_and_paste_your_token_here>
 ```
 

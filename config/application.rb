@@ -1,10 +1,15 @@
 require_relative "boot"
 
 require "rails/all"
+require "dotenv"
+Dotenv.load
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+
+# load .env.local
+Dotenv::Rails.files.unshift(".env.local")
 
 module EducateHacksFpp
   class Application < Rails::Application
