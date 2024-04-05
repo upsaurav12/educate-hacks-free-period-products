@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css' %>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    .map-popup {
+      max-width: 200px;
+    }
+  </style>
+</head>
+
+
+<body>
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <h1 class="title has-text-centered">👋 Flow Aid</h1>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <div id='map' style='width: 100%; height: 400px; margin-bottom: 1.5rem;'></div>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <form id="item-form">
+            <div class="field">
+              <label class="label">Item Name</label>
+              <div class="control">
+                <input class="input" id="item-name" type="text" placeholder="Item Name" required>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Quantity</label>
+              <div class="control">
+                <input class="input" id="quantity" type="number" placeholder="Quantity" required>
+              </div>
+            </div>
+            <div class="field is-grouped">
+              <div class="control">
+                <input class="input" id="latitude" type="text" placeholder="Latitude" required>
+              </div>
+              <div class="control">
+                <input class="input" id="longitude" type="text" placeholder="Longitude" required>
+              </div>
+              <div class="control">
+                <button class="button is-primary" id="add-item">Add Item</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+<script>
+    function getPopupHTML (latlong, name, qty) {
+      // Destructuring latitude and longitude from latlong array
+      const [lat, long] = latlong;
+
+      // Template for the popup content
+      const formattedHTML = `
+          <div class="popup">
+              <h3 class="popup-title">${name}</h3>
+              <p class="popup-info">Location: ${lat}, ${long}</p>
+              <p class="popup-info">Quantity: ${qty}</p>
+          </div>
+      `;
+      
+      return formattedHTML;
+    };
+
+    mapboxgl.accessToken = "<%= @mapbox_token %>";
+    let initCoords = [-74.5, 40];
+    let map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: initCoords,
+      zoom: 9
+    });
+    
+    // Initial marker
+    let marker = new mapboxgl.Marker()
+      .setLngLat(initCoords)
+      .addTo(map);
+
+    // popup for the marker
+    let initName = "Sanitary Pads";
+    let initQty = 100;
+
+    let popup = new mapboxgl.Popup({
+        className: 'map-popup'
+    }).setHTML(
+      getPopupHTML(initCoords, initName, initQty)
+    );
+    marker.setPopup(popup);
+
+    // Event listener for form submission
+    document.getElementById('item-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+      let latitude = parseFloat(document.getElementById('latitude').value);
+      let longitude = parseFloat(document.getElementById('longitude').value);
+      let itemName = document.getElementById('item-name').value;
+      let quantity = document.getElementById('quantity').value;
+
+      // Add marker for new item
+      let newMarker = new mapboxgl.Marker()
+        .setLngLat([longitude, latitude])
+        .addTo(map);
+
+      let newPopup = new mapboxgl.Popup({
+        className: 'map-popup'
+      }).setHTML(
+        getPopupHTML([longitude, latitude], itemName, quantity)
+      );
+      newMarker.setPopup(newPopup);
+
+      // You can also clear the form fields if needed
+      document.getElementById('latitude').value = '';
+      document.getElementById('longitude').value = '';
+      document.getElementById('item-name').value = '';
+      document.getElementById('quantity').value = '';
+    });
+    
+
+</script>
+
+
+

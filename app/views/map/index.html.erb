@@ -12,13 +12,19 @@
   <div id="map"></div>
   <script>
       // will this leak on page?
-      mapboxgl.accessToken = "<%= @mapbox_access_token %>";
+      mapboxgl.accessToken = "<%= @mapbox_token %>";
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [-74.5, 40],
         zoom: 14
       });
+      // Iterate over locations and add markers
+      <%= raw @locations.to_json.each do |location| %>
+        new mapboxgl.Marker()
+        .setLngLat([<%= location.longitude %>, <%= location.latitude %>])
+        .addTo(map);
+      <% end %>
   </script>
 </body>
 </html>
