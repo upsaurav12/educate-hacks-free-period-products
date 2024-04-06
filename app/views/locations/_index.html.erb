@@ -8,13 +8,17 @@
   <%= form.submit %>
 <% end %>
 
-<%#><div id="locations">
-  <% @locations.each do |location| %>
-<%#>    <%= render location %>
-<%#>    <p>
-<%#>      <%= link_to "Show this location", location %>
-<%#>    </p>
+<div id="locations">
+  <% if @locations.present? %>
+    <% @locations.each do |location| %>
+      <%= render location %>
+      <p>
+        <%= link_to "Show this location", location %>
+      </p>
+    <% end %>
+  <% else %>
+    <p>No locations found.</p>
   <% end %>
-<%#></div>
+</div>
 
-<%= link_to "New location", new_location_path %>
+
