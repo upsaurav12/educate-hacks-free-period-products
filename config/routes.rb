@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :home_pages do
     collection do
       get 'contact'
+      get 'about'
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
 
 
   # Defines the root path route ("/")
-  root "locations#index"
+  #root "locations#index"
+  root "home_pages#index"
 
 end

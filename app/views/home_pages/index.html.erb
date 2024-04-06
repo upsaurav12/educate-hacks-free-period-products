@@ -1,3 +1,25 @@
-<h1>This is Home Page </h1>
-<%=link_to "Location" ,new_location_path %>
-<%=link_to "Contact" , contact_home_pages_path %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css' %>
+  <style>
+  html{
+    background-color: white
+  }
+  </style>
+</head>
+
+<body class="has-background-white">
+  <div class="container"> <!-- Add Bulma container class for content -->
+    <h1 class="title is-1 has-text-black">This is Home Page</h1>
+    <h1>Hello again</h1>
+    <div class="is-flex ">
+        <%= render 'locations/index'%>
+        <%= link_to "Location", new_location_path , class: "button has-background-grey" %>
+        <%= link_to "Contact", contact_home_pages_path, class: "button has-background-primary" %>
+        <%= link_to "About", about_home_pages_path, class: "button has-background-success" %>
+    </div>
+  </div>
+</body>
